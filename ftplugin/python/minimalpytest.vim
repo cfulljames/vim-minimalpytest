@@ -60,7 +60,8 @@ endfunction
 " Use an external tool (like wslpath or cygpath) to convert file paths.
 function! s:ConvertPath(path)
     if exists("g:convert_path_cmd")
-        return system(g:convert_path_cmd . " " . a:path)
+        let l:path_lines = systemlist(g:convert_path_cmd . " " . a:path)
+        return "'" . l:path_lines[0] . "'"
     endif
     return a:path
 endfunction
